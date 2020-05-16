@@ -47,14 +47,14 @@ CompileScript: <<
   -DREADLINE_LIBRARIES:FILEPATH=%p/lib/libreadline.dylib \
   .
  /usr/bin/make
- fink-package-precedence --depfile-ext='\.d' --prohibit-bdep=fluidsynth-dev,fluidsynth1-dev .
+ fink-package-precedence --depfile-ext='\.d' --prohibit-bdep=fluidsynth-dev,fluidsynth1-dev, fluidsynth2-dev .
 <<
 ###
 InstallScript: <<
 #! /bin/sh -ev
-make install DESTDIR=%d 
+make install DESTDIR=%d
 mkdir -p %i/lib/pkgconfig
-ln -s %p/lib/fluidsynth/lib/pkgconfig/fluidsynth.pc %i/lib/pkgconfig/fluidsynth.pc
+ln -s %p/lib/%N/lib/pkgconfig/fluidsynth.pc %i/lib/pkgconfig/fluidsynth.pc
 <<
 SplitOff: <<
  Package: %N-shlibs
@@ -78,7 +78,7 @@ SplitOff2: <<
  Replaces: fluidsynth-dev, fluidsynth1-dev, fluidsynth2-dev
 <<
 ###
-DocFiles: README.md 
+DocFiles: README.md
 ###
 HomePage: http://fluidsynth.org
 License: LGPL
@@ -86,13 +86,13 @@ License: LGPL
 Description: Software synthesizer with Soundfont 2 specs
 DescDetail: <<
 Fluidsynth is a free software synthesizer which is currently based on the
-SoundFont standard and supports real time MIDI effect controls. It can be 
-used as a shared library for embedding in other applications, can play MIDI 
-files and has a command line shell. Many other applications use FluidSynth 
-for audio synthesis. 
+SoundFont standard and supports real time MIDI effect controls. It can be
+used as a shared library for embedding in other applications, can play MIDI
+files and has a command line shell. Many other applications use FluidSynth
+for audio synthesis.
 <<
 DescUsage: <<
-To properly link to fluidsynth2, packages that do not use 
+To properly link to fluidsynth2, packages that do not use
 the standard pkg-config system will need to set some combination
 of CFLAGS, LDFLAGS, or similar compiler flags to point to
 %p/lib/%N/(include/lib).
